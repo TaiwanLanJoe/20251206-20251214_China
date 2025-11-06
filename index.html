@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重慶成都九日遊行程表</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&family=ZCOOL+XiaoWei&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif TC', 'ZCOOL XiaoWei', serif;
+            background: #2F1810;
+            background-image:
+                linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: #2C2C2C;
+            line-height: 1.8;
+        }
+
+        .scroll-container {
+            max-width: 1400px;
+            margin: 30px auto;
+            background: linear-gradient(to bottom, #F4ECD8 0%, #F5E6D3 100%);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5),
+                        inset 0 0 100px rgba(212, 175, 55, 0.1);
+            border: 3px solid #8B4513;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .scroll-container::before,
+        .scroll-container::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 30px;
+            background: #8B4513;
+            z-index: 10;
+        }
+
+        .scroll-container::before {
+            top: -15px;
+            border-radius: 15px;
+            box-shadow: inset 0 -3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-container::after {
+            bottom: -15px;
+            border-radius: 15px;
+            box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-wrapper {
+            padding: 60px 50px 50px;
+            position: relative;
+        }
+
+        /* 中國風裝飾元素 */
+        .corner-decoration {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            opacity: 0.3;
+        }
+
+        .corner-decoration.top-left {
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #C8102E 0%, transparent 100%);
+            border-top: 3px solid #D4AF37;
+            border-left: 3px solid #D4AF37;
+        }
+
+        .corner-decoration.top-right {
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(225deg, #C8102E 0%, transparent 100%);
+            border-top: 3px solid #D4AF37;
+            border-right: 3px solid #D4AF37;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 50px;
+            position: relative;
+            background: linear-gradient(135deg, #8B0000 0%, #C8102E 50%, #8B0000 100%);
+            border: 3px double #D4AF37;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.4),
+                        inset 0 2px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #D4AF37;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
+                         0 0 20px rgba(212, 175, 55, 0.3);
+            letter-spacing: 8px;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #F5E6D3;
+            font-weight: 400;
+            letter-spacing: 3px;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 900px;
+            height: 300px;
+            object-fit: cover;
+            border: 5px solid #8B4513;
+            border-radius: 5px;
+            margin: 30px auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+                        inset 0 0 30px rgba(212, 175, 55, 0.1);
+        }
+
+        /* 時間軸樣式 */
+        .timeline-container {
+            position: relative;
+            padding-left: 60px;
+            margin: 40px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom,
+                        #D4AF37 0%,
+                        #C8102E 25%,
+                        #2F5233 50%,
+                        #C8102E 75%,
+                        #D4AF37 100%);
+        }
+
+        .day-container {
+            background: linear-gradient(135deg, #FFFEF0 0%, #F5E6D3 100%);
+            border: 2px solid #8B4513;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2),
+                        inset 0 0 30px rgba(212, 175, 55, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .day-container:hover {
+            transform: translateX(10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .day-container::before {
+            content: '';
+            position: absolute;
+            left: -60px;
+            top: 30px;
+            width: 30px;
+            height: 30px;
+            background: #C8102E;
+            border: 4px solid #D4AF37;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px #F4ECD8,
+                        0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        .day-number {
+            position: absolute;
+            left: -75px;
+            top: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #C8102E 0%, #8B0000 100%);
+            border: 3px solid #D4AF37;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #D4AF37;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            transform: rotate(-5deg);
+            z-index: 3;
+        }
+
+        .day-title {
+            color: #8B0000;
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+            border-bottom: 2px solid #D4AF37;
+            padding-bottom: 10px;
+        }
+
+        .day-date {
+            color: #8B4513;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .day-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border: 4px solid #8B4513;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 天氣區塊 */
+        .weather-box {
+            background: linear-gradient(135deg, #E8F4F8 0%, #D6EAF8 100%);
+            border: 2px solid #5DADE2;
+            border-left: 5px solid #2874A6;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .weather-icon {
+            font-size: 2rem;
+        }
+
+        .weather-info {
+            flex: 1;
+        }
+
+        .weather-info strong {
+            color: #2874A6;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* 預算區塊 */
+        .budget-box {
+            background: linear-gradient(135deg, #FEF5E7 0%, #FCF3CF 100%);
+            border: 2px solid #F39C12;
+            border-left: 5px solid #D68910;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .budget-box h4 {
+            color: #D68910;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .budget-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .budget-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px dashed #F39C12;
+        }
+
+        .budget-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            color: #D68910;
+            padding-top: 10px;
+            margin-top: 5px;
+            border-top: 2px solid #F39C12;
+        }
+
+        /* 打卡清單 */
+        .checklist-box {
+            background: linear-gradient(135deg, #FADBD8 0%, #F5B7B1 100%);
+            border: 2px solid #E74C3C;
+            border-left: 5px solid #C0392B;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .checklist-box h4 {
+            color: #C0392B;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .checklist-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+
+        .checklist-item:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #C0392B;
+        }
+
+        .checklist-item label {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .checklist-item input[type="checkbox"]:checked + label {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .time-schedule {
+            background: linear-gradient(135deg, #E8DAEF 0%, #D7BDE2 100%);
+            border: 2px solid #8E44AD;
+            border-left: 5px solid #6C3483;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .time-schedule h4 {
+            color: #6C3483;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .time-schedule ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .time-schedule li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+            position: relative;
+        }
+
+        .time-schedule li strong {
+            color: #8E44AD;
+            min-width: 130px;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #D5F4E6 0%, #ABEBC6 100%);
+            border: 2px solid #28B463;
+            border-left: 5px solid #1E8449;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1rem;
+        }
+
+        .tip-box::before {
+            content: '💡 ';
+            font-size: 1.2rem;
+        }
+
+        .section-title {
+            color: #8B0000;
+            font-size: 2rem;
+            margin: 50px 0 30px 0;
+            padding: 15px 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #C8102E 0%, #8B0000 100%);
+            color: #D4AF37;
+            border: 3px double #D4AF37;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.3);
+            letter-spacing: 5px;
+            position: relative;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: '◆';
+            color: #D4AF37;
+            margin: 0 15px;
+        }
+
+        .info-section {
+            background: linear-gradient(135deg, #FFFEF0 0%, #F5E6D3 100%);
+            border: 2px solid #8B4513;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-section h2 {
+            color: #8B0000;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #D4AF37;
+        }
+
+        .info-section ul {
+            padding-left: 25px;
+        }
+
+        .info-section li {
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .info-section li::marker {
+            color: #C8102E;
+        }
+
+        .accommodation-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .accommodation-box {
+            background: linear-gradient(135deg, #E8F8F5 0%, #A9DFBF 100%);
+            border: 3px solid #27AE60;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .accommodation-box h4 {
+            color: #1E8449;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #27AE60;
+        }
+
+        .accommodation-box p {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+
+        .accommodation-box strong {
+            color: #1E8449;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: #27AE60;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 5px 5px 5px 0;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #FEF5E7 0%, #FAD7A0 100%);
+            border: 2px solid #E67E22;
+            border-left: 5px solid #CA6F1E;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+
+        .highlight-box strong {
+            color: #CA6F1E;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            background: linear-gradient(135deg, #8B0000 0%, #C8102E 50%, #8B0000 100%);
+            color: #D4AF37;
+            border: 3px double #D4AF37;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.4);
+        }
+
+        .footer p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #2874A6;
+            text-decoration: underline;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 60px 20px 30px;
+            }
+
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 4px;
+            }
+
+            .timeline-container {
+                padding-left: 40px;
+            }
+
+            .day-number {
+                left: -55px;
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+
+            .day-container::before {
+                left: -45px;
+                width: 25px;
+                height: 25px;
+            }
+
+            .accommodation-section {
+                grid-template-columns: 1fr;
+            }
+
+            .budget-items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-container">
+        <div class="corner-decoration top-left"></div>
+        <div class="corner-decoration top-right"></div>
+
+        <div class="content-wrapper">
+            <header>
+                <h1>重慶成都九日遊</h1>
+                <p class="subtitle">探索山城與天府之國的魅力</p>
+            </header>
+
+            <img class="hero-image" src="img/重慶夜景.jpg" alt="重慶夜景">
+
+            <h2 class="section-title">詳細行程</h2>
+
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+
+                <!-- Day 1 -->
+                <div class="day-container">
+                    <div class="day-number">Day 1</div>
+                    <h3 class="day-title">抵達山城重慶，索道過江魔幻夜</h3>
+                    <p class="day-date">📅 日期：2025/12/06 (六)</p>
+
+                    <div class="weather-box">
+                        <div class="weather-icon">🌤️</div>
+                        <div class="weather-info">
+                            <strong>天氣預報</strong>
+                            <p>多雲 | 溫度：8-15°C | 濕度：75% | 建議穿著：羽絨外套、保暖衣物</p>
+                        </div>
+                    </div>
+
+                    <img class="day-image" src="img/洪涯洞.jpg" alt="洪崖洞夜景">
+
+                    <h4 style="color: #8B0000; margin-top: 20px; font-size: 1.2rem;">行程：</h4>
+                    <ul style="padding-left: 25px; margin: 15px 0;">
+                        <li>下午 (交通)：16:05 降落重慶江北機場 (CKG)。搭乘輕軌 3 號線至牛角沱站，轉乘 6 號線至小什字站，步行至重慶解放碑亞朵飯店辦理入住。</li>
+                        <li>夜晚探索：前往洪崖洞，體驗重慶獨特的魔幻夜景。</li>
+                    </ul>
+
+                    <div class="time-schedule">
+                        <h4>預計時間安排：</h4>
+                        <ul>
+                            <li><strong>16:05</strong> - 抵達重慶江北機場 (CKG)</li>
+                            <li><strong>17:00 ~ 18:00</strong> - 搭輕軌前往飯店，辦理入住</li>
+                            <li><strong>18:30 ~ 20:00</strong> - 晚餐於解放碑附近</li>
+                            <li><strong>20:00 ~ 22:30</strong> - 洪崖洞夜景 → 解放碑步行街</li>
+                        </ul>
+                    </div>
+
+                    <div class="budget-box">
+                        <h4>💰 預估花費</h4>
+                        <div class="budget-items">
+                            <div class="budget-item">
+                                <span>機場→飯店交通：</span>
+                                <span>¥10</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>晚餐：</span>
+                                <span>¥80-120</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>景點門票：</span>
+                                <span>免費</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>當日總計：</span>
+                                <span>¥90-130</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <h4>✓ 打卡清單</h4>
+                        <div class="checklist-items">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d1-1">
+                                <label for="d1-1">抵達重慶江北機場</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d1-2">
+                                <label for="d1-2">入住重慶解放碑亞朵飯店</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d1-3">
+                                <label for="d1-3">洪崖洞魔幻夜景拍照</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d1-4">
+                                <label for="d1-4">解放碑步行街閒逛</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        小貼士：從機場至飯店約40分鐘車程。飯店位置便利，步行可到解放碑、洪崖洞等景點。輕軌是重慶最佳交通選擇，可使用重慶交通卡或手機支付。
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4 style="color: #CA6F1E; margin-bottom: 10px;">🍜 今日美食推薦</h4>
+                        <div style="background: #FFF3CD; padding: 10px; border-radius: 5px; margin: 10px 0; border-left: 3px solid #FF6B6B;">
+                            <strong style="color: #C8102E;">⚠️ 不吃辣提醒：</strong>點餐時務必說「<strong>不要辣</strong>」或「<strong>鴛鴦鍋</strong>」（火鍋）、「<strong>清湯</strong>」（麵食），當地的「微辣」對不吃辣的人來說還是很辣！
+                        </div>
+                        <p style="margin-top: 10px; font-weight: 600; color: #27AE60;">✅ 不辣/微辣推薦：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>鴛鴦火鍋</strong> - 火鍋店都可選擇鴛鴦鍋（一半清湯一半辣湯）｜人均：¥80-150</li>
+                            <li><strong>重慶抄手（清湯）</strong> - 「吳抄手」可選清湯，類似餛飩（洪崖洞附近）｜人均：¥18-30</li>
+                            <li><strong>重慶小面（清湯）</strong> - 點餐時說「清湯小面，不要辣」｜人均：¥15-25</li>
+                            <li><strong>重慶豆花飯</strong> - 豆花本身不辣，配菜可選不辣｜人均：¥25-40</li>
+                        </ul>
+                        <p style="margin-top: 10px; font-weight: 600; color: #E74C3C;">🌶️ 辣味菜品（需避開或要求不辣）：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>麻辣火鍋</strong> - 建議選鴛鴦鍋，只涮清湯那邊</li>
+                            <li><strong>酸辣粉</strong> - 天生就辣，不建議嘗試</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="day-container">
+                    <div class="day-number">Day 2</div>
+                    <h3 class="day-title">探秘烏江畫廊，尋訪上古九黎城</h3>
+                    <p class="day-date">📅 日期：2025/12/07 (日)</p>
+
+                    <div class="weather-box">
+                        <div class="weather-icon">☁️</div>
+                        <div class="weather-info">
+                            <strong>天氣預報</strong>
+                            <p>陰天 | 溫度：6-13°C | 濕度：80% | 建議穿著：厚外套、防風衣物</p>
+                        </div>
+                    </div>
+
+                    <img class="day-image" src="img/烏江.jpg" alt="烏江畫廊山水">
+
+                    <h4 style="color: #8B0000; margin-top: 20px; font-size: 1.2rem;">行程：</h4>
+                    <ul style="padding-left: 25px; margin: 15px 0;">
+                        <li>本日行程：參加【烏江畫廊 & 蚩尤九黎城】一日遊。</li>
+                        <li>行程精華：欣賞壯麗的烏江畫廊 (《變形金剛》取景地)，並探訪蚩尤九黎城，感受宏偉的苗族建築群與蚩尤文化。</li>
+                        <li>夜晚回歸：回到市區，到十八梯感受新舊重慶交融的獨特氛圍。</li>
+                    </ul>
+
+                    <div class="time-schedule">
+                        <h4>預計時間安排 (一日遊)：</h4>
+                        <ul>
+                            <li><strong>07:00</strong> - 重慶市區 (飯店附近) 集合出發</li>
+                            <li><strong>11:00 ~ 13:00</strong> - 烏江畫廊景區遊覽 (含午餐)</li>
+                            <li><strong>14:30 ~ 16:30</strong> - 蚩尤九黎城遊覽</li>
+                            <li><strong>17:00</strong> - 集合返程</li>
+                            <li><strong>20:30 ~ 21:30</strong> - 抵達重慶市區 → 十八梯夜景/晚餐</li>
+                        </ul>
+                    </div>
+
+                    <div class="budget-box">
+                        <h4>💰 預估花費</h4>
+                        <div class="budget-items">
+                            <div class="budget-item">
+                                <span>一日遊費用：</span>
+                                <span>¥280-350</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>午餐（含）：</span>
+                                <span>已含</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>晚餐：</span>
+                                <span>¥60-100</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>當日總計：</span>
+                                <span>¥340-450</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <h4>✓ 打卡清單</h4>
+                        <div class="checklist-items">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d2-1">
+                                <label for="d2-1">烏江畫廊《變形金剛》取景地拍照</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d2-2">
+                                <label for="d2-2">蚩尤九黎城建築群探訪</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d2-3">
+                                <label for="d2-3">體驗苗族文化表演</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d2-4">
+                                <label for="d2-4">十八梯新舊交融街景</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        小貼士：此為長途一日遊 (車程約 3-4 小時單趟)，飯店附近有集合點。務必早出發，並準備好零食和水。參加一日遊通常包含來回交通，較為省心。
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4 style="color: #CA6F1E; margin-bottom: 10px;">🍜 今日美食推薦（晚餐）</h4>
+                        <p style="margin-top: 10px; font-weight: 600; color: #27AE60;">✅ 不辣/微辣推薦：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>重慶豆花飯（不辣）</strong> - 「蛙花園豆花」，豆花本身清淡，可要求配菜不辣｜人均：¥25-40</li>
+                            <li><strong>重慶小面（清湯）</strong> - 「板凳面」點清湯小面（較場口）｜人均：¥15-25</li>
+                            <li><strong>重慶抄手（清湯）</strong> - 類似餛飩，湯底清淡｜人均：¥18-30</li>
+                        </ul>
+                        <p style="margin-top: 10px; font-weight: 600; color: #E74C3C;">🌶️ 辣味菜品（避開）：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>烤腦花、毛血旺</strong> - 重口味且很辣，不建議</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="day-container">
+                    <div class="day-number">Day 3</div>
+                    <h3 class="day-title">古鎮慢時光與山城不夜天</h3>
+                    <p class="day-date">📅 日期：2025/12/08 (一)</p>
+
+                    <div class="weather-box">
+                        <div class="weather-icon">🌦️</div>
+                        <div class="weather-info">
+                            <strong>天氣預報</strong>
+                            <p>陣雨 | 溫度：7-14°C | 濕度：85% | 建議穿著：防水外套、雨傘</p>
+                        </div>
+                    </div>
+
+                    <img class="day-image" src="img/磁器口.jpg" alt="磁器口古鎮">
+
+                    <h4 style="color: #8B0000; margin-top: 20px; font-size: 1.2rem;">行程：</h4>
+                    <ul style="padding-left: 25px; margin: 15px 0;">
+                        <li>上午至下午 (交通)：搭乘輕軌 1 號線到磁器口站。在石板路上尋找地道小吃。</li>
+                        <li>中午：華禮宴 (重慶麗晶酒店) 享用精緻午餐。</li>
+                        <li>傍晚至深夜 (交通)：搭乘輕軌 1 號線轉 6 號線到紅旗河溝站，轉 3 號線至觀音橋站。晚餐後可接著探索「不夜城」的九街 (9th Street)。</li>
+                    </ul>
+
+                    <div class="time-schedule">
+                        <h4>預計時間安排：</h4>
+                        <ul>
+                            <li><strong>09:30 ~ 12:00</strong> - 磁器口古鎮遊覽與小吃體驗</li>
+                            <li><strong>12:30 ~ 14:00</strong> - 華禮宴 (重慶麗晶酒店) 午餐</li>
+                            <li><strong>15:00 ~ 17:30</strong> - 觀音橋商圈購物/休閒</li>
+                            <li><strong>18:00 ~ 22:00</strong> - 晚餐 → 九街 (9th Street) 體驗夜生活</li>
+                        </ul>
+                    </div>
+
+                    <div class="budget-box">
+                        <h4>💰 預估花費</h4>
+                        <div class="budget-items">
+                            <div class="budget-item">
+                                <span>輕軌交通：</span>
+                                <span>¥15</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>古鎮小吃：</span>
+                                <span>¥40-60</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>華禮宴午餐：</span>
+                                <span>¥150-250</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>晚餐+夜生活：</span>
+                                <span>¥100-200</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>當日總計：</span>
+                                <span>¥305-525</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <h4>✓ 打卡清單</h4>
+                        <div class="checklist-items">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d3-1">
+                                <label for="d3-1">磁器口古鎮石板路漫步</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d3-2">
+                                <label for="d3-2">品嚐陳麻花、毛血旺等小吃</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d3-3">
+                                <label for="d3-3">華禮宴精緻午餐體驗</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d3-4">
+                                <label for="d3-4">觀音橋商圈購物</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d3-5">
+                                <label for="d3-5">九街夜生活打卡</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        小貼士：重慶市內景點間都可依靠輕軌到達，方便快捷。飯店到磁器口古鎮約20分鐘車程。九街是潮流聚集地，夜生活豐富，搭乘滴滴打車 (Didi) 也很方便。
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4 style="color: #CA6F1E; margin-bottom: 10px;">🍜 今日美食推薦</h4>
+                        <p style="margin-top: 10px; font-weight: 600; color: #27AE60;">✅ 不辣/微辣推薦：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>磁器口陳麻花（不辣零食）</strong> - 甜味或椒鹽口味，不辣的伴手禮｜人均：¥20-40</li>
+                            <li><strong>磁器口糍粑（不辣甜點）</strong> - 糯米製品，甜味為主｜人均：¥10-20</li>
+                            <li><strong>華禮宴（精緻粵菜）</strong> - 重慶麗晶酒店，可選不辣菜色（預訂推薦）｜人均：¥150-250</li>
+                            <li><strong>重慶烤魚（清蒸/微辣）</strong> - 可選清蒸或番茄味，避開麻辣口味｜人均：¥60-100</li>
+                            <li><strong>鹽水鵝（微辣可調整）</strong> - 「胖子媽鹽水鵝」可要求不辣醬料｜人均：¥70-120</li>
+                        </ul>
+                        <p style="margin-top: 10px; font-weight: 600; color: #E74C3C;">🌶️ 辣味菜品（避開）：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>毛血旺、酸辣粉</strong> - 非常辣，不建議嘗試</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 4 -->
+                <div class="day-container">
+                    <div class="day-number">Day 4</div>
+                    <h3 class="day-title">勇闖武隆，見證大自然的鬼斧神工</h3>
+                    <p class="day-date">📅 日期：2025/12/09 (二)</p>
+
+                    <div class="weather-box">
+                        <div class="weather-icon">☀️</div>
+                        <div class="weather-info">
+                            <strong>天氣預報</strong>
+                            <p>晴天 | 溫度：5-12°C | 濕度：70% | 建議穿著：多層次保暖、登山鞋</p>
+                        </div>
+                    </div>
+
+                    <img class="day-image" src="img/武隆天生三橋.jpg" alt="武隆天生三橋">
+
+                    <h4 style="color: #8B0000; margin-top: 20px; font-size: 1.2rem;">行程：</h4>
+                    <ul style="padding-left: 25px; margin: 15px 0;">
+                        <li>本日行程：參加【武隆】一日遊。</li>
+                        <li>行程精華：深入《滿城盡帶黃金甲》拍攝地，探索雄偉的【天生三橋】與【龍水峽地縫】，並體驗玻璃觀景台。</li>
+                        <li>交通：一日遊行程將包含重慶市區至武隆的來回交通及景區接駁。</li>
+                    </ul>
+
+                    <div class="time-schedule">
+                        <h4>預計時間安排 (一日遊)：</h4>
+                        <ul>
+                            <li><strong>07:30</strong> - 重慶市區 (飯店附近) 集合出發</li>
+                            <li><strong>11:30 ~ 13:00</strong> - 抵達武隆，景區內用餐</li>
+                            <li><strong>13:30 ~ 15:30</strong> - 天生三橋遊覽</li>
+                            <li><strong>16:00 ~ 17:30</strong> - 龍水峽地縫遊覽</li>
+                            <li><strong>17:30</strong> - 集合返程</li>
+                            <li><strong>21:00</strong> - 抵達重慶市區</li>
+                        </ul>
+                    </div>
+
+                    <div class="budget-box">
+                        <h4>💰 預估花費</h4>
+                        <div class="budget-items">
+                            <div class="budget-item">
+                                <span>一日遊費用：</span>
+                                <span>¥350-450</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>午餐（含）：</span>
+                                <span>已含</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>玻璃觀景台：</span>
+                                <span>¥30</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>當日總計：</span>
+                                <span>¥380-480</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <h4>✓ 打卡清單</h4>
+                        <div class="checklist-items">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d4-1">
+                                <label for="d4-1">天生三橋壯麗景觀</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d4-2">
+                                <label for="d4-2">《滿城盡帶黃金甲》拍攝地打卡</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d4-3">
+                                <label for="d4-3">玻璃觀景台體驗</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d4-4">
+                                <label for="d4-4">龍水峽地縫探險</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        小貼士：‼️ 行李提醒：建議輕裝上陣，景區內步行距離長，請務必穿著舒適好走的鞋子！參加一日遊通常包含來回交通，較為省心。
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4 style="color: #CA6F1E; margin-bottom: 10px;">🍜 今日美食推薦</h4>
+                        <p style="margin-top: 10px;">一日遊午餐已包含在行程內。晚上返回市區可選擇：</p>
+                        <p style="margin-top: 10px; font-weight: 600; color: #27AE60;">✅ 不辣/微辣推薦：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>泉水雞（微辣可調整）</strong> - 「南山泉水雞」可選清湯或微辣口味｜人均：¥60-90</li>
+                            <li><strong>鴛鴦火鍋</strong> - 「珮姐老火鍋」選鴛鴦鍋，涮清湯那邊｜人均：¥80-150</li>
+                            <li><strong>重慶烤魚（清蒸）</strong> - 選清蒸或番茄味｜人均：¥60-100</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 5 -->
+                <div class="day-container">
+                    <div class="day-number">Day 5</div>
+                    <h3 class="day-title">移步天府之國，初探繁華與不夜</h3>
+                    <p class="day-date">📅 日期：2025/12/10 (三)</p>
+
+                    <div class="weather-box">
+                        <div class="weather-icon">🌤️</div>
+                        <div class="weather-info">
+                            <strong>天氣預報</strong>
+                            <p>多雲轉晴 | 溫度：6-14°C | 濕度：75% | 建議穿著：輕便外套、舒適鞋</p>
+                        </div>
+                    </div>
+
+                    <img class="day-image" src="img/成都春熙路.jpg" alt="成都春熙路">
+
+                    <h4 style="color: #8B0000; margin-top: 20px; font-size: 1.2rem;">行程：</h4>
+                    <ul style="padding-left: 25px; margin: 15px 0;">
+                        <li>上午 (交通)：從飯店步行至小什字站搭乘輕軌 6 號線至小龍坎站，轉 1 號線至沙坪壩站，步行至重慶西站搭乘高鐵前往成都東站 (車程約 1.5 - 2 小時)。</li>
+                        <li>下午：抵達成都東站後，搭乘地鐵 2 號線至東門橋站，轉 3 號線至市二醫院站，步行至成都春熙路文殊院地鐵站亞朵S飯店入住，隨後前往春熙路或太古里。</li>
+                        <li>夜生活：晚餐後可前往錦里古街或九眼橋酒吧街體驗成都夜生活。</li>
+                    </ul>
+
+                    <div class="time-schedule">
+                        <h4>預計時間安排：</h4>
+                        <ul>
+                            <li><strong>09:00 ~ 10:00</strong> - 飯店退房，前往重慶西站</li>
+                            <li><strong>10:28 ~ 12:19</strong> - 搭乘高鐵 (重慶西→成都東)</li>
+                            <li><strong>12:30 ~ 13:30</strong> - 搭地鐵至飯店，辦理入住</li>
+                            <li><strong>14:00 ~ 15:00</strong> - 午餐於飯店附近</li>
+                            <li><strong>15:30 ~ 18:00</strong> - 春熙路/太古里 閒逛</li>
+                            <li><strong>18:30 ~ 22:30</strong> - 晚餐 → 錦里古街 (或九眼橋酒吧街)</li>
+                        </ul>
+                    </div>
+
+                    <div class="budget-box">
+                        <h4>💰 預估花費</h4>
+                        <div class="budget-items">
+                            <div class="budget-item">
+                                <span>重慶西→成都東高鐵：</span>
+                                <span>¥154</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>輕軌/地鐵交通：</span>
+                                <span>¥20</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>午餐+晚餐：</span>
+                                <span>¥120-180</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>購物/消費：</span>
+                                <span>¥100-300</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>當日總計：</span>
+                                <span>¥394-654</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <h4>✓ 打卡清單</h4>
+                        <div class="checklist-items">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d5-1">
+                                <label for="d5-1">重慶退房，搭乘高鐵前往成都</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d5-2">
+                                <label for="d5-2">入住成都春熙路亞朵S飯店</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d5-3">
+                                <label for="d5-3">春熙路商圈購物</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d5-4">
+                                <label for="d5-4">太古里時尚街區</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d5-5">
+                                <label for="d5-5">錦里古街夜景</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        小貼士：從飯店至重慶西站約40分鐘車程。成都市區交通以地鐵為主，飯店靠近文書院地鐵站，交通便利。建議購買天府通交通卡或使用 App 乘車碼。
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4 style="color: #CA6F1E; margin-bottom: 10px;">🍜 今日美食推薦</h4>
+                        <p style="margin-top: 10px; font-weight: 600; color: #27AE60;">✅ 不辣/微辣推薦：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>鴛鴦火鍋</strong> - 「大龍燚」、「蜀大俠」選鴛鴦鍋，清湯涮菜｜人均：¥80-150</li>
+                            <li><strong>龍抄手（清湯）</strong> - 「龍抄手」總店，類似餛飩，清湯不辣｜人均：¥25-40</li>
+                            <li><strong>賴湯圓（甜點）</strong> - 湯圓甜品，完全不辣｜人均：¥15-25</li>
+                            <li><strong>鐘水餃（原味/紅油分開）</strong> - 可要求不放紅油，只要原味醬料｜人均：¥20-35</li>
+                            <li><strong>三大炮（甜點）</strong> - 糯米甜品，不辣｜人均：¥10-20</li>
+                        </ul>
+                        <p style="margin-top: 10px; font-weight: 600; color: #E74C3C;">🌶️ 辣味菜品（需特別說明）：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>擔擔麵、缽缽雞</strong> - 傳統做法很辣，點餐時要求「不辣」或「微辣」</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 6 -->
+                <div class="day-container">
+                    <div class="day-number">Day 6</div>
+                    <h3 class="day-title">青城山一日遊 & 都江堰夜間燈光秀</h3>
+                    <p class="day-date">📅 日期：2025/12/11 (四)</p>
+
+                    <div class="weather-box">
+                        <div class="weather-icon">🌫️</div>
+                        <div class="weather-info">
+                            <strong>天氣預報</strong>
+                            <p>多雲有霧 | 溫度：4-11°C | 濕度：85% | 建議穿著：厚外套、登山鞋、防霧眼鏡</p>
+                        </div>
+                    </div>
+
+                    <img class="day-image" src="img/都江堰.jpg" alt="都江堰">
+
+                    <h4 style="color: #8B0000; margin-top: 20px; font-size: 1.2rem;">行程：</h4>
+                    <ul style="padding-left: 25px; margin: 15px 0;">
+                        <li>本日行程：參加【青城山一日遊】，傍晚返回市區後前往觀賞都江堰夜間燈光秀。</li>
+                        <li>行程精華：遊覽道教聖地青城山，下午返回市區，晚上欣賞都江堰夜間燈光秀。</li>
+                        <li>交通：一日遊包含成都市區至青城山的來回交通，晚餐後自行前往都江堰景區。</li>
+                    </ul>
+
+                    <div class="time-schedule">
+                        <h4>預計時間安排：</h4>
+                        <ul>
+                            <li><strong>07:30</strong> - 成都市區 (飯店附近) 集合出發</li>
+                            <li><strong>09:00 ~ 13:00</strong> - 青城山遊覽 (建議搭乘索道節省體力)</li>
+                            <li><strong>13:30 ~ 14:30</strong> - 青城山景區午餐</li>
+                            <li><strong>15:00</strong> - 搭乘旅遊車返回成都市區</li>
+                            <li><strong>16:30</strong> - 抵達飯店附近，休息</li>
+                            <li><strong>18:00 ~ 19:00</strong> - 晚餐</li>
+                            <li><strong>19:30 ~ 21:00</strong> - 前往都江堰觀賞夜間燈光秀</li>
+                            <li><strong>21:30</strong> - 返回飯店</li>
+                        </ul>
+                    </div>
+
+                    <div class="budget-box">
+                        <h4>💰 預估花費</h4>
+                        <div class="budget-items">
+                            <div class="budget-item">
+                                <span>青城山一日遊：</span>
+                                <span>¥180-250</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>索道費用：</span>
+                                <span>¥60</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>都江堰夜間燈光秀：</span>
+                                <span>¥80-120</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>晚餐+交通：</span>
+                                <span>¥80-120</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>當日總計：</span>
+                                <span>¥400-550</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <h4>✓ 打卡清單</h4>
+                        <div class="checklist-items">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d6-1">
+                                <label for="d6-1">青城山道教聖地遊覽</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d6-2">
+                                <label for="d6-2">搭乘青城山索道</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d6-3">
+                                <label for="d6-3">品嚐青城山特色素齋</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d6-4">
+                                <label for="d6-4">都江堰夜間燈光秀</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        小貼士：因安排晚間燈光秀，今日參加青城山、都江堰一日遊。
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4 style="color: #CA6F1E; margin-bottom: 10px;">🍜 今日美食推薦</h4>
+                        <p style="margin-top: 10px; font-weight: 600; color: #27AE60;">✅ 不辣/清淡推薦（今日很適合不吃辣的你！）：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>青城山素齋</strong> - 道觀素齋以清淡為主，很少辣味｜人均：¥40-80</li>
+                            <li><strong>都江堰豆腐腦</strong> - 清淡豆花小吃，可選不辣醬料｜人均：¥10-20</li>
+                            <li><strong>都江堰青城老臘肉</strong> - 煙燻風味，不辣｜人均：¥30-50</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 7 -->
+                <div class="day-container">
+                    <div class="day-number">Day 7</div>
+                    <h3 class="day-title">峨眉金頂衝刺與樂山大佛遊船</h3>
+                    <p class="day-date">📅 日期：2025/12/12 (五)</p>
+
+                    <div class="weather-box">
+                        <div class="weather-icon">❄️</div>
+                        <div class="weather-info">
+                            <strong>天氣預報</strong>
+                            <p>晴天有霜 | 峨眉山頂：-2~5°C | 樂山：8-15°C | 建議穿著：羽絨服、保暖內衣</p>
+                        </div>
+                    </div>
+
+                    <img class="day-image" src="img/峨眉山金頂佛像.jpg" alt="峨眉山金頂佛像">
+
+                    <h4 style="color: #8B0000; margin-top: 20px; font-size: 1.2rem;">行程：</h4>
+                    <ul style="padding-left: 25px; margin: 15px 0;">
+                        <li>本日行程：參加【峨眉山金頂 + 樂山大佛遊船】一日遊。</li>
+                        <li>行程精華：上午衝刺佛教聖地【峨眉山金頂】，感受雲海佛光。下午搭乘遊船，從江面完整觀看【樂山大佛】全貌。</li>
+                        <li>交通：一日遊包含成都至峨眉/樂山全程接駁、景區巴士與纜車。</li>
+                    </ul>
+
+                    <div class="time-schedule">
+                        <h4>預計時間安排 (超長一日遊)：</h4>
+                        <ul>
+                            <li><strong>06:30</strong> - 成都市區 (飯店附近) 集合出發</li>
+                            <li><strong>10:00 ~ 12:30</strong> - 峨眉山金頂 (含接駁車/纜車時間)</li>
+                            <li><strong>12:30 ~ 13:30</strong> - 轉移至樂山 (含午餐)</li>
+                            <li><strong>14:30 ~ 16:30</strong> - 樂山大佛遊船觀景</li>
+                            <li><strong>17:00</strong> - 集合返程</li>
+                            <li><strong>21:00 ~ 22:00</strong> - 抵達成都市區</li>
+                        </ul>
+                    </div>
+
+                    <div class="budget-box">
+                        <h4>💰 預估花費</h4>
+                        <div class="budget-items">
+                            <div class="budget-item">
+                                <span>一日遊費用：</span>
+                                <span>¥450-600</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>午餐（含）：</span>
+                                <span>已含</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>纜車+接駁車：</span>
+                                <span>¥120</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>遊船票：</span>
+                                <span>¥70</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>當日總計：</span>
+                                <span>¥640-790</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <h4>✓ 打卡清單</h4>
+                        <div class="checklist-items">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d7-1">
+                                <label for="d7-1">峨眉山金頂48米四面十方普賢菩薩像</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d7-2">
+                                <label for="d7-2">峨眉山雲海美景</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d7-3">
+                                <label for="d7-3">搭乘遊船觀賞樂山大佛全貌</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d7-4">
+                                <label for="d7-4">江上拍攝樂山大佛最佳角度</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        小貼士：‼️ 極限挑戰：這是結合峨眉山登頂和樂山大佛遊船的超長程一日遊 (預計超過 12 小時)。請務必儲備體力，並穿著保暖衣物！飯店附近有集合點，參加一日遊通常包含來回交通，較為省心。
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4 style="color: #CA6F1E; margin-bottom: 10px;">🍜 今日美食推薦</h4>
+                        <p style="margin-top: 10px;">一日遊午餐已包含在行程內。</p>
+                        <p style="margin-top: 10px; font-weight: 600; color: #27AE60;">✅ 不辣/清淡推薦：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>峨眉山雪魔芋（清淡）</strong> - 峨眉山特色，涼拌類可選不辣｜人均：¥20-40</li>
+                            <li><strong>峨眉豆腐腦（不辣）</strong> - 豆花小吃，清淡爽口｜人均：¥10-20</li>
+                            <li><strong>樂山甜皮鴨（不辣）</strong> - 樂山特色滷味，甜味為主｜人均：¥30-50</li>
+                        </ul>
+                        <p style="margin-top: 10px; font-weight: 600; color: #E74C3C;">🌶️ 辣味菜品（避開）：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>缽缽雞、冒菜</strong> - 傳統做法很辣，如果要吃請務必要求不辣</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 8 -->
+                <div class="day-container">
+                    <div class="day-number">Day 8</div>
+                    <h3 class="day-title">成都美食、詩聖故里與夜生活體驗</h3>
+                    <p class="day-date">📅 日期：2025/12/13 (六)</p>
+
+                    <div class="weather-box">
+                        <div class="weather-icon">🌤️</div>
+                        <div class="weather-info">
+                            <strong>天氣預報</strong>
+                            <p>晴朗 | 溫度：7-15°C | 濕度：65% | 建議穿著：輕便外套、舒適休閒裝</p>
+                        </div>
+                    </div>
+
+                    <img class="day-image" src="img/杜甫草堂.jpg" alt="杜甫草堂">
+
+                    <h4 style="color: #8B0000; margin-top: 20px; font-size: 1.2rem;">行程：</h4>
+                    <ul style="padding-left: 25px; margin: 15px 0;">
+                        <li>上午 (早餐 & 詩聖故里): 前往玉林菜市場品嚐道地早餐 (肥腸粉、鍋盔)，隨後前往附近的杜甫草堂感受詩意氛圍。</li>
+                        <li>中午 (午餐): 搭乘地鐵前往建設路小吃街一路吃過去，品嚐各種網紅和本地美食。</li>
+                        <li>下午 (下午茶 & 休息): 在人民公園的茶館點一杯蓋碗茶，體驗成都人「巴適」的精髓，還可以體驗掏耳朵服務。</li>
+                        <li>晚上 (晚餐 & 夜生活): 前往九眼橋或蘭桂坊享受成都夜生活，體驗當地夜間文化。</li>
+                    </ul>
+
+                    <div class="time-schedule">
+                        <h4>預計時間安排：</h4>
+                        <ul>
+                            <li><strong>08:00 ~ 09:00</strong> - 飯店出發，前往玉林菜市場享用早餐</li>
+                            <li><strong>09:00 ~ 09:30</strong> - 從玉林前往杜甫草堂（步行或短程地鐵）</li>
+                            <li><strong>09:30 ~ 11:30</strong> - 杜甫草堂詩意遊覽</li>
+                            <li><strong>12:00 ~ 14:00</strong> - 建設路小吃街午餐美食探索</li>
+                            <li><strong>14:30 ~ 16:30</strong> - 人民公園茶館品茶/休息/掏耳朵</li>
+                            <li><strong>17:00 ~ 22:00</strong> - 晚餐 → 九眼橋夜生活體驗</li>
+                        </ul>
+                    </div>
+
+                    <div class="budget-box">
+                        <h4>💰 預估花費</h4>
+                        <div class="budget-items">
+                            <div class="budget-item">
+                                <span>地鐵交通：</span>
+                                <span>¥15</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>杜甫草堂門票：</span>
+                                <span>¥50</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>早餐+小吃街：</span>
+                                <span>¥80-120</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>人民公園茶館：</span>
+                                <span>¥30-50</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>晚餐+夜生活：</span>
+                                <span>¥120-200</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>當日總計：</span>
+                                <span>¥295-435</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <h4>✓ 打卡清單</h4>
+                        <div class="checklist-items">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d8-1">
+                                <label for="d8-1">玉林菜市場早餐（肥腸粉、鍋盔）</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d8-2">
+                                <label for="d8-2">杜甫草堂詩意遊覽</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d8-3">
+                                <label for="d8-3">建設路小吃街美食探索</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d8-4">
+                                <label for="d8-4">人民公園茶館品茶、掏耳朵</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d8-5">
+                                <label for="d8-5">九眼橋酒吧街夜生活</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        小貼士：<strong>交通路線：</strong>飯店（市二醫院站）→ 地鐵3號線到衣冠廟站，轉5號線到神仙樹站（玉林路附近）→ 吃完早餐後步行或搭5號線到高升橋站（杜甫草堂）→ 地鐵7號線到建設路站 → 地鐵回到人民公園站 → 最後搭地鐵或打車到九眼橋。玉林菜市場和杜甫草堂距離很近，順路安排最省時間！
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4 style="color: #CA6F1E; margin-bottom: 10px;">🍜 今日美食推薦（重點美食日！）</h4>
+                        <p style="margin-top: 10px; font-weight: 600; color: #C8102E;">今天是成都美食巡禮日，但不用擔心，很多都有不辣選項！</p>
+                        <p style="margin-top: 10px; font-weight: 600; color: #27AE60;">✅ 不辣/清淡推薦：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>玉林早餐 - 鍋盔（不辣）</strong> - 酥脆餅類，可選牛肉或椒鹽口味｜人均：¥10-20</li>
+                            <li><strong>玉林早餐 - 豆漿油條（不辣）</strong> - 傳統早點，完全不辣｜人均：¥10-15</li>
+                            <li><strong>串串香（清湯）</strong> - 「袁記」可選清湯鍋底，選不辣的食材涮｜人均：¥50-80</li>
+                            <li><strong>蒼蠅館子</strong> - 「明婷飯店」點回鍋肉、宮保雞丁時要求「不辣」或「微辣」｜人均：¥40-70</li>
+                            <li><strong>建設路 - 甜水麵（微辣可調）</strong> - 點餐時要求不放辣椒油｜人均：¥12-20</li>
+                            <li><strong>建設路 - 燒烤（不辣串）</strong> - 選孜然烤串，避開辣味串｜人均：¥30-60</li>
+                            <li><strong>人民公園茶館（不辣）</strong> - 「鶴鳴茶社」蓋碗茶 + 掏耳朵，完美休息｜人均：¥30-60</li>
+                            <li><strong>甜點推薦</strong> - 三大炮、糖油果子、葉兒粑（都不辣）｜人均：¥10-20</li>
+                        </ul>
+                        <p style="margin-top: 10px; font-weight: 600; color: #E74C3C;">🌶️ 辣味菜品（需特別說明或避開）：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li><strong>肥腸粉、冒菜、兔頭</strong> - 傳統做法非常辣，不建議嘗試（兔頭即使要求不辣也有基本辣度）</li>
+                            <li><strong>夫妻肺片</strong> - 紅油菜品，如果要吃請特別要求「少放紅油」或「紅油另外給」</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 9 -->
+                <div class="day-container">
+                    <div class="day-number">Day 9</div>
+                    <h3 class="day-title">蓉渝穿梭，踏上歸途</h3>
+                    <p class="day-date">📅 日期：2025/12/14 (日)</p>
+
+                    <div class="weather-box">
+                        <div class="weather-icon">☁️</div>
+                        <div class="weather-info">
+                            <strong>天氣預報</strong>
+                            <p>陰天 | 溫度：6-12°C | 濕度：80% | 建議穿著：舒適保暖外套</p>
+                        </div>
+                    </div>
+
+                    <img class="day-image" src="img/2026.jpg" alt="2026">
+
+                    <h4 style="color: #8B0000; margin-top: 20px; font-size: 1.2rem;">行程：</h4>
+                    <ul style="padding-left: 25px; margin: 15px 0;">
+                        <li>上午 (交通)：飯店步行至市二醫院站搭乘地鐵 3 號線至春熙路站，轉 2 號線至成都東客站，搭乘高鐵前往重慶西站。</li>
+                        <li>下午 (交通)：抵達重慶西站後，步行至輕軌站搭乘環線至謝家灣站，轉 5 號線至重慶江北國際機場站 (CKG)。</li>
+                        <li>傍晚：抵達機場後辦理登機手續，搭乘 17:20 的班機，返回溫暖的家。</li>
+                    </ul>
+
+                    <div class="time-schedule">
+                        <h4>預計時間安排：</h4>
+                        <ul>
+                            <li><strong>08:00 ~ 09:00</strong> - 飯店退房，前往成都東站</li>
+                            <li><strong>09:37 ~ 11:31</strong> - 搭乘高鐵 (成都東→重慶西)</li>
+                            <li><strong>12:00 ~ 13:00</strong> - 重慶西站搭乘輕軌至機場 (CKG)</li>
+                            <li><strong>13:30</strong> - 抵達重慶江北國際機場，辦理登機</li>
+                            <li><strong>17:20</strong> - 班機起飛，踏上歸途</li>
+                        </ul>
+                    </div>
+
+                    <div class="budget-box">
+                        <h4>💰 預估花費</h4>
+                        <div class="budget-items">
+                            <div class="budget-item">
+                                <span>成都東→重慶西高鐵：</span>
+                                <span>¥154</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>地鐵/輕軌交通：</span>
+                                <span>¥20</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>早餐/簡餐：</span>
+                                <span>¥40-60</span>
+                            </div>
+                            <div class="budget-item">
+                                <span>當日總計：</span>
+                                <span>¥214-234</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checklist-box">
+                        <h4>✓ 打卡清單</h4>
+                        <div class="checklist-items">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d9-1">
+                                <label for="d9-1">成都飯店退房</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d9-2">
+                                <label for="d9-2">搭乘高鐵前往重慶</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d9-3">
+                                <label for="d9-3">抵達重慶江北機場</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="d9-4">
+                                <label for="d9-4">順利返家</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        小貼士：‼️ 重要提醒：成都東站到重慶西站，高鐵車程約 1.5 小時。從重慶西站至江北機場約40分鐘車程。請預留 3 小時以上的轉機和報到時間，以免耽誤國際航班。飯店至成都東站約30分鐘車程。
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 美食推薦 -->
+            <section id="food-recommendations" class="info-section">
+                <h2>舌尖上的渝蓉 (美食推薦)</h2>
+                <div class="weather-box" style="border-color: #E67E22; border-left-color: #CA6F1E;">
+                    <div class="weather-icon">🌡️</div>
+                    <div class="weather-info">
+                        <strong style="color: #CA6F1E;">12月氣候提醒</strong>
+                        <p>重慶與成都12月份平均溫度約5-15°C，濕度較高，請攜帶保暖衣物，特別是峨眉山、青城山等高海拔地區溫度更低。</p>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <h3 style="color: #C8102E; font-size: 1.4rem; margin-bottom: 15px; padding-left: 10px; border-left: 4px solid #D4AF37;">🔥 重慶必吃美食</h3>
+                    <ul>
+                        <li><strong>重慶麻辣火鍋</strong> - 推薦餐廳：「大龍燚火鍋」、「德莊火鍋」、「小天鵝火鍋」、「珮姐老火鍋」，地點：解放碑附近、洪崖洞均有分店｜人均：¥80-150</li>
+                        <li><strong>重慶小面</strong> - 推薦餐廳：「花市豌雜麵」、「板凳面」、「勝利路132號小面」，地點：磁器口古鎮、較場口、勝利路｜人均：¥15-25</li>
+                        <li><strong>重慶酸辣粉</strong> - 推薦餐廳：「好又來酸辣粉」、「趙氏傳人」，地點：解放碑、八一路好吃街｜人均：¥12-20</li>
+                        <li><strong>重慶抄手（餛飩）</strong> - 推薦餐廳：「吳抄手」、「老麻抄手」，地點：較場口、洪崖洞附近｜人均：¥18-30</li>
+                        <li><strong>重慶烤魚</strong> - 推薦餐廳：「江邊城外烤全魚」、「探爐烤魚」，地點：觀音橋、南濱路｜人均：¥60-100</li>
+                        <li><strong>重慶江湖菜</strong> - 推薦餐廳：「九村烤脑花」、「磁器口毛血旺」，地點：磁器口古鎮、解放碑｜人均：¥50-80</li>
+                        <li><strong>重慶豆花飯</strong> - 推薦餐廳：「蛙花園豆花」、「廖記棒棒雞」，地點：十八梯、較場口｜人均：¥25-40</li>
+                        <li><strong>重慶泉水雞</strong> - 推薦餐廳：「南山泉水雞一條街」，地點：南山風景區｜人均：¥60-90</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h3 style="color: #C8102E; font-size: 1.4rem; margin-bottom: 15px; padding-left: 10px; border-left: 4px solid #D4AF37;">🌶️ 成都必吃美食</h3>
+                    <ul>
+                        <li><strong>成都火鍋</strong> - 推薦餐廳：「大龍燚火鍋」、「蜀大俠火鍋」、「川西壩子」，地點：春熙路、太古里、寬窄巷子｜人均：¥80-150</li>
+                        <li><strong>成都串串香</strong> - 推薦餐廳：「袁記串串香」、「玉林串串香」、「冒椒火辣」，地點：玉林路附近、建設路小吃街｜人均：¥50-80</li>
+                        <li><strong>成都肥腸粉</strong> - 推薦餐廳：「郝氏肥腸粉」、「雙流肥腸粉」、「白家肥腸粉」，地點：人民公園附近、春熙路商圈｜人均：¥15-25</li>
+                        <li><strong>成都擔擔麵</strong> - 推薦餐廳：「陳麻婆豆腐」、「龍抄手」總店，地點：春熙路、總府路｜人均：¥20-35</li>
+                        <li><strong>夫妻肺片</strong> - 推薦餐廳：「夫妻肺片總店」、「巴蜀大宅門」，地點：總府路、寬窄巷子｜人均：¥30-50</li>
+                        <li><strong>麻婆豆腐</strong> - 推薦餐廳：「陳麻婆豆腐」總店、「馬旺子」，地點：西玉龍街、騾馬市｜人均：¥40-70</li>
+                        <li><strong>成都兔頭</strong> - 推薦餐廳：「雙流老媽兔頭」、「啃上癮兔頭」，地點：雙流、建設路｜人均：¥15-30/個</li>
+                        <li><strong>缽缽雞</strong> - 推薦餐廳：「缽缽雞」、「樂山缽缽雞」，地點：錦里、寬窄巷子｜人均：¥25-45</li>
+                        <li><strong>龍抄手</strong> - 推薦餐廳：「龍抄手」總店、「春熙路店」，地點：春熙路、總府路｜人均：¥25-40</li>
+                        <li><strong>鐘水餃</strong> - 推薦餐廳：「鐘水餃」總店，地點：荔枝巷、寬窄巷子｜人均：¥20-35</li>
+                        <li><strong>賴湯圓</strong> - 推薦餐廳：「賴湯圓」總店，地點：總府街、春熙路｜人均：¥15-25</li>
+                        <li><strong>三大炮</strong> - 推薦餐廳：錦里古街、寬窄巷子內各攤位，地點：錦里、寬窄巷子｜人均：¥10-20</li>
+                        <li><strong>甜水麵</strong> - 推薦餐廳：「洞子口張老二涼粉」，地點：洞子口、文殊院附近｜人均：¥12-20</li>
+                        <li><strong>冒菜</strong> - 推薦餐廳：「冒椒火辣」、「豪客來冒菜」，地點：春熙路、建設路｜人均：¥30-50</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h3 style="color: #C8102E; font-size: 1.4rem; margin-bottom: 15px; padding-left: 10px; border-left: 4px solid #D4AF37;">☕ 特色餐廳 & 茶館推薦</h3>
+                    <ul>
+                        <li><strong>重慶江湖菜</strong> - 推薦餐廳：「胖子媽鹽水鵝」、「枇杷園火鍋」，地點：南濱路、觀音橋｜人均：¥70-120</li>
+                        <li><strong>成都茶館</strong> - 推薦茶館：「鶴鳴茶社」（人民公園內）、「錦江劇場茶館」，地點：人民公園、春熙路｜人均：¥30-60（含掏耳朵）</li>
+                        <li><strong>成都蒼蠅館子</strong> - 推薦餐廳：「明婷飯店」、「盤飧市」，地點：華興街、玉林路｜人均：¥40-70</li>
+                        <li><strong>成都精緻川菜</strong> - 推薦餐廳：「玉芝蘭」、「淞雲澤」（米其林）、「松雲澤」，地點：悅來鎮、寬窄巷子｜人均：¥300-800</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box" style="margin-top: 30px;">
+                    <strong>🍜 美食小貼士</strong>
+                    <ul style="margin-top: 10px; padding-left: 25px;">
+                        <li><strong>⚠️ 不吃辣必看！</strong>重慶成都大部分菜品都是辣的，但不用擔心：
+                            <ul style="margin-top: 5px; padding-left: 20px;">
+                                <li>火鍋：選「<strong>鴛鴦鍋</strong>」（一半清湯一半辣湯），只涮清湯那邊</li>
+                                <li>麵食：點餐時說「<strong>清湯</strong>」或「<strong>不要辣</strong>」</li>
+                                <li>炒菜：要求「<strong>不放辣椒</strong>」或「<strong>不辣</strong>」</li>
+                                <li><strong>重要：</strong>當地的「微辣」對不吃辣的人來說還是很辣，務必說「不要辣」！</li>
+                            </ul>
+                        </li>
+                        <li><strong>不辣菜品推薦：</strong>抄手（餛飩）、龍抄手、賴湯圓、三大炮、糍粑、鍋盔、豆花飯、甜皮鴨、青城山素齋等都是清淡或甜味</li>
+                        <li><strong>用餐時間：</strong>當地人晚餐時間較晚（19:00-20:00），熱門餐廳建議提前預約或早點去避開高峰期</li>
+                        <li><strong>網紅店建議：</strong>像「文和友」、「太古里商圈」的網紅店排隊時間長，建議避開週末和飯點</li>
+                        <li><strong>支付方式：</strong>大部分餐廳接受微信/支付寶，但小攤位可能需要現金</li>
+                        <li><strong>腸胃準備：</strong>建議攜帶腸胃藥以防萬一</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 實用資訊 -->
+            <section id="practical-info" class="info-section">
+                <h2>實用資訊</h2>
+                <div class="tip-box">
+                    <strong>必備物品清單</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>保暖衣物：12月重慶成都較冷濕，建議攜帶羽絨服、保暖內衣褲</li>
+                        <li>防滑鞋：景區多有石階和濕滑路面，建議穿防滑運動鞋</li>
+                        <li>雨具：雨傘或輕便雨衣，12月可能有降雨</li>
+                        <li>常用藥品：感冒藥、腸胃藥、暈車藥</li>
+                        <li>行動電源：景區行走時間長，確保手機電量充足</li>
+                        <li>交通卡：重慶交通卡或成都天府通，方便搭乘地鐵和公車</li>
+                        <li>支付工具：微信/支付寶，現金少量即可</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>緊急聯絡資訊</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>中國大陸緊急電話：110 (警察)、120 (救護車)、119 (消防)</li>
+                        <li>重慶旅遊諮詢：023-12301</li>
+                        <li>成都旅遊諮詢：028-12301</li>
+                        <li>台灣外交部緊急聯絡：002-0800-085-095</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 夜間特別活動 -->
+            <section id="night-activities" class="info-section">
+                <h2>夜間特別活動</h2>
+                <div class="day-container" style="border-left: 5px solid #8E44AD;">
+                    <h3 style="color: #6C3483; font-size: 1.3rem;">都江堰夜間燈光秀</h3>
+                    <p style="margin: 15px 0;">都江堰夜間燈光秀以傳統水利文化為主題，結合現代燈光技術，展示古堰夜色之美。</p>
+                    <ul style="padding-left: 25px;">
+                        <li>時間：通常在19:30-21:00左右</li>
+                        <li>地點：都江堰景區內</li>
+                        <li>特色：燈光與水景相結合的視覺盛宴</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #C0392B;"><strong>備註：</strong>夜間燈光秀並非每日都有，建議出行前先確認當日是否開放，並預約門票。</p>
+                </div>
+            </section>
+
+            <!-- 一日遊行程連結 -->
+            <section id="trip-links" class="info-section">
+                <h2>一日遊行程連結</h2>
+                <ul>
+                    <li><a href="https://tw.trip.com/things-to-do/detail/60312972/" target="_blank">Trip.com - 重慶一日遊</a></li>
+                    <li><a href="https://hk.trip.com/things-to-do/detail/93626270?language=HK&locale=zh_hk&districtId=158&districtType=1&ext-list=city_category_card_detail&ext-seoabtest=seocomment_A_seolistcard_C_seolistbigcard_A_seorecommend_B_itinerary_A&ext-parentid=50170592&ext-seoslug=chongqing-day-tour" target="_blank">Trip.com - 重慶一日遊 (香港版)</a></li>
+                    <li><a href="https://tw.trip.com/travel-guide/attraction/chongqing/city-152859682/" target="_blank">Trip.com - 重慶城市指南</a></li>
+                    <li><a href="https://tw.trip.com/things-to-do/detail/16748205?ext-mixlist=activity_main&locale=zh-TW&curr=TWD" target="_blank">Trip.com - 成都一日遊</a></li>
+                </ul>
+            </section>
+
+            <!-- 住宿安排 -->
+            <section id="accommodation" class="info-section">
+                <h2>住宿安排</h2>
+                <div class="accommodation-section">
+                    <div class="accommodation-box">
+                        <h4>🏨 重慶住宿</h4>
+                        <p><strong>重慶解放碑亞朵飯店</strong></p>
+                        <p style="margin: 10px 0;">
+                            <span class="date-badge">入住：2025/12/06</span>
+                            <span class="date-badge">退房：2025/12/10</span>
+                        </p>
+                        <p><strong>住宿天數：</strong>4晚</p>
+                        <p><strong>地點：</strong>位於解放碑核心商圈，交通便利，步行即可到達解放碑、洪崖洞等景點</p>
+                        <p><strong>交通：</strong>飯店附近有多個輕軌站點，方便前往各景點</p>
+                    </div>
+                    <div class="accommodation-box">
+                        <h4>🏨 成都住宿</h4>
+                        <p><strong>成都春熙路文殊院地鐵站亞朵S飯店</strong></p>
+                        <p style="margin: 10px 0;">
+                            <span class="date-badge">入住：2025/12/10</span>
+                            <span class="date-badge">退房：2025/12/14</span>
+                        </p>
+                        <p><strong>住宿天數：</strong>4晚</p>
+                        <p><strong>地點：</strong>位於春熙路商圈附近，靠近文殊院地鐵站，交通便利</p>
+                        <p><strong>交通：</strong>步行即可到達春熙路、太古里，搭乘地鐵可輕鬆前往市內各景點</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 行程亮點總結 -->
+            <section id="summary" class="info-section">
+                <h2>行程亮點總結</h2>
+                <div class="highlight-box">
+                    <p><strong>重慶亮點：</strong>魔幻立體交通、洪崖洞夜景、長江索道、磁器口古鎮、武隆喀斯特地貌</p>
+                    <p><strong>成都亮點：</strong>都江堰水利工程、青城山道教文化、峨眉山佛教聖地、樂山大佛、川菜美食文化</p>
+                    <p><strong>交通提醒：</strong>重慶以輕軌為主，成都以地鐵為主，建議購買交通卡或使用手機乘車碼</p>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <p>重慶成都九日遊行程表</p>
+                <p style="margin-top: 15px; font-size: 1rem;">歡迎參加猛哥旅行團，祝您旅途愉快，體驗山城與天府之國的無限魅力！</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
